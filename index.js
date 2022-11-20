@@ -1,3 +1,4 @@
+const Discord = require('discord.js');
 const { Client, Events, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
 
@@ -22,10 +23,6 @@ for (const file of commandFiles) {
 	client.commands.set(command.data.name, command);
 }
 
-client.once(Events.ClientReady, () => {
-	console.log('Ready!');
-});
-
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
@@ -41,5 +38,18 @@ client.on(Events.InteractionCreate, async interaction => {
 		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
 	}
 });
+const eventsPath = path.join(__dirname, 'events');
+const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
+
+for (const file of eventFiles) {
+	const filePath = path.join(eventsPath, file);
+	const event = require(filePath);
+	if (event.once) {
+		client.once(event.name, (...args) => event.execute(...args));
+	}
+	else {
+		client.on(event.name, (...args) => event.execute(...args));
+	}
+}
 
 client.login(token);
