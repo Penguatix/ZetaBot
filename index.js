@@ -12,6 +12,7 @@ const client = new Client({
 const fs = require('node:fs');
 const path = require('node:path');
 
+client.commands = new Discord.Collection();
 const commandsPath = path.join(__dirname, 'Commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
