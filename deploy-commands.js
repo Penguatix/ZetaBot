@@ -15,6 +15,7 @@ for (const file of commandFiles) {
 // Construct and prepare an instance of the REST module
 const rest = new REST({ version: '10' }).setToken(token);
 
+console.log('Deployed Commands');
 // and deploy your commands!
 (async () => {
 	try {
