@@ -12,8 +12,6 @@ const client = new Client({
 const fs = require('node:fs');
 const path = require('node:path');
 
-// eslint-disable-next-line no-undef
-client.commands = new Collection();
 const commandsPath = path.join(__dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
 
