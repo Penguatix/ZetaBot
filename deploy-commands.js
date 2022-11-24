@@ -15,22 +15,6 @@ for (const file of commandFiles) {
 // Construct and prepare an instance of the REST module
 const rest = new REST({ version: '10' }).setToken(token);
 
-console.log('Deployed Commands');
 // and deploy your commands!
-(async () => {
-	try {
-		console.log(`Started refreshing ${commands.length} application (/) commands.`);
-
-		// The put method is used to fully refresh all commands in the guild with the current set
-		const data = await rest.put(
-			Routes.applicationCommands(clientId),
-			{ body: commands },
-		);
-
-		console.log(`Successfully reloaded ${data.length} application (/) commands.`);
-	}
-	catch (error) {
-		// And of course, make sure you catch and log any errors!
-		console.error(error);
-	}
-});
+console.log(`Started refreshing ${commands.length} application (/) commands.`);
+rest.put(Routes.applicationCommands(clientId), { body: commands }).then((data) => console.log(`Successfully registered ${data.length} commands.`)).catch(console.error);
