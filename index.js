@@ -51,5 +51,13 @@ for (const file of eventFiles) {
 		client.on(event.name, (...args) => event.execute(...args));
 	}
 }
+client.on(Events.InteractionCreate, interaction => {
+	if (!interaction.isChatInputCommand()) return;
 
+	const { commandName } = interaction;
+
+	if (commandName === 'stats') {
+		return interaction.reply(`Server count: ${client.guilds.cache.size}.`);
+	}
+});
 client.login(token);
