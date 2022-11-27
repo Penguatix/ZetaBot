@@ -60,4 +60,17 @@ client.on(Events.InteractionCreate, interaction => {
 		return interaction.reply(`Server count: ${client.guilds.cache.size}.`);
 	}
 });
+
+const { get } = require('https');
+get('https://discord.com/api/v10/gateway', ({ statusCode }) => {
+	if (statusCode == 429) {
+		process.kill(1);
+	}
+});
+const express = require('express')();
+express.all('/', function(req, res) {
+	res.send('Server Started');
+});
+express.listen(process.env.PORT, console.log('Started'));
+
 client.login(token);
