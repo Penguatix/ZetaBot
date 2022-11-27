@@ -5,12 +5,11 @@ module.exports = {
 		.setName('commands')
 		.setDescription('List Of Commands <3'),
 	async execute(interaction) {
-		const p = '/';
 		const infoEmbed = new Discord.EmbedBuilder()
 			.setColor('#57a3bd')
 			.setTitle('Commands')
 			.addFields(
-				{ name: '━━ 🍀 ・ General commands ━━', value: `\`${p}help\`, \`${p}ping\`, \`${p}avatar\`, \`${p}user\`, \`${p}stats\`, \`${p}server\`,  \`${p}prune\`` },
+				{ name: '━━ 🍀 ・ General commands ━━', value: '`/help`, `/ping`, `/avatar`, `/user`, `/stats`, `/server`,  `/prune`' },
 				{ name: '឵឵  ឵឵  ឵឵', value: '឵឵  ឵឵  ឵឵' },
 			);
 		interaction.reply({ embeds: [infoEmbed] }).catch(console.error);
